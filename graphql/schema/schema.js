@@ -5,6 +5,9 @@ const typeDefs = gql`
     type Query {
         getUser: [User]
         getUserById(id:ID!) : User
+
+        getPost: [Post]
+        getPostById(id:ID!) : Post
         
     }
 
@@ -13,6 +16,13 @@ const typeDefs = gql`
         id : String
         title : String
         completed : Boolean
+    }
+
+    type Post {
+        userId : ID
+        id : String
+        title : String
+        body : String
     }
 `;
 

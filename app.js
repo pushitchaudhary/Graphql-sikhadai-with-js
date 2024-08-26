@@ -3,21 +3,19 @@ const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const { typeDefs } = require('./graphql/schema/schema.js'); // Import your typeDefs
 const userResolvers = require('./graphql/resolver/userResolvers.js'); // Import your resolvers
+const postResolver = require('./graphql/resolver/postResolvers.js')
 
 // Initialize Express app
 const app = express();
-
-// ENV File Configuring
 const dotenv = require('dotenv');
-dotenv.config(); // Load environment variables
-
+dotenv.config(); 
 
 require('./database/connection.js')
 
-// Initialize Apollo Server with typeDefs and resolvers
+
 const server = new ApolloServer({
   typeDefs,
-  resolvers: userResolvers, // Use your resolvers
+  resolvers: [userResolvers,postResolver], // Use your resolvers
   context: ({ req, res }) => ({ req, res }), // Pass context to resolvers
 });
 
